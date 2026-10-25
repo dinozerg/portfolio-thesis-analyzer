@@ -2,6 +2,8 @@
 
 Portfolio Thesis Analyzer is a finance and FinTech application prototype designed to help investors explore how individual stock selections and portfolio weights influence overall investment performance and risk.
 
+<img width="2000" height="1143" alt="image" src="https://github.com/user-attachments/assets/c2b202af-a36e-42d4-a4f0-fa1cfba80970" />
+
 The central visualization will plot cumulative returns over time: thin colored lines for individual securities and a thick red line for the combined portfolio. Users will be able to compare portfolios, inspect diversification, and generate a concise investment thesis grounded in the calculated metrics.
 
 Course assignment: Building a Finance or FinTech Application Using AI Coding Agents
