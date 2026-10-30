@@ -2,25 +2,69 @@
 
 **FIN 471 — Project: Investment Portfolio Risk Analyzer**
 
-[![Working Portfolio Thesis Analyzer: ten holdings, allocations, historical performance, and investment outcome](screenshots/portfolio-overview.png)](https://www.awesomescreenshot.com/video/57918894?key=9ba6d82660079e865bfe5942cc3b9eb0)
+[![Portfolio Thesis Analyzer showing ten holdings, performance, and investment outcomes](screenshots/portfolio-overview.png)](screenshots/portfolio-overview.png?raw=true)
+
+*Click the screenshot to open the full-size image.*
 
 **[▶ Watch the application demonstration](https://www.awesomescreenshot.com/video/57918894?key=9ba6d82660079e865bfe5942cc3b9eb0)**
 
-Click the screenshot or the link above to watch the shared video on Awesome Screenshot.
+The recording opens on Awesome Screenshot. GitHub READMEs do not support external iframe players.
 
-A local, interactive finance prototype that shows how securities and allocations
-change portfolio performance and risk. It addresses the financial problem of
-underestimating individual-security risk and portfolio concentration. Users can
-compare allocations and evaluate historical returns, volatility, risk-adjusted
-performance, and losses against SPY before forming their own investment thesis.
-The screenshot above shows the working application using **real historical data**.
-Below the main chart, the result shows what a hypothetical **$10,000 starting investment** became,
-the dollar gain or loss, the total percentage return, and the same investment in
-SPY. Values update whenever the holdings, weights, or dates change. This is a
-historical illustration before fees and taxes, not a forecast. Dollar amounts in
-the headline are rounded to whole dollars.
+## What does the app do?
 
-## Run it
+Investors can focus on a stock's gain while overlooking how the whole portfolio behaves. This application lets you choose stocks and ETFs, set starting weights, and see how those choices would have performed together using real historical prices.
+
+Compare your portfolio with **SPY**, an ETF tracking the S&P 500, and explore three questions: **How much did it earn? How much did it fluctuate? How far did it fall?** The result supports an informed discussion of concentration and risk; it does not recommend investments or predict future returns.
+
+[Run the app](#run-the-app) · [Visual walkthrough](#visual-walkthrough) · [Data and calculations](#data-and-calculations) · [Assignment coverage](#assignment-coverage)
+
+## Visual walkthrough
+
+### 1. Choose investments and set their weights
+
+Search by company name or ticker using **Add a stock or ETF**, then click **+ Add**. Company names appear beside their tickers so you can identify each holding. Start with at least three securities for the class project.
+
+In the holdings table, enter the starting percentages and click **Apply weights** when they total **100%**. Try the assignment example: **AAPL 40%, MSFT 35%, SPY 25%**. Draft changes leave the previous results in place until applied. **Equal weight** resets the mix; the × removes a holding and redistributes its allocation.
+
+[![Company names and weights in the holdings table, with AAPL highlighted on the chart](screenshots/company-names.png)](screenshots/company-names.png?raw=true)
+
+*Selecting AAPL highlights its performance line. This changes the display, not the portfolio weights.*
+
+### 2. Read the chart and the dollar outcome
+
+The **thick red line** represents your portfolio, the thin lines represent its holdings, and the dashed line represents SPY. Every series begins at **$1**, making different securities comparable. Hover over a line for values; click a line or ticker to keep it highlighted, and use **Clear selection** or Escape to reset.
+
+Directly beneath the chart, the app translates the return into the ending value and gain or loss on a hypothetical **$10,000 starting investment**. SPY uses the same starting amount and dates.
+
+[![Historical date controls and the portfolio's dollar outcome compared with SPY](screenshots/dollars-under-chart.png)](screenshots/dollars-under-chart.png?raw=true)
+
+*This example shows the starting investment, ending value, dollar gain, percentage return, and market comparison together.*
+
+Use **1 year**, **2 years**, **5 years**, or **Custom dates → Apply range** to change the analysis window. Dates are inclusive, with only common valid trading observations used. To explore another mix, change **Number of holdings** and click **Generate random mix**. Random mixes are experiments, not recommendations.
+
+### 3. Compare risk, allocation, and the benchmark
+
+The allocation donut shows where the starting money went. The risk cards and comparison table show whether the portfolio's return came with more volatility or a deeper decline than SPY.
+
+[![Portfolio risk measures, allocation donut, and side-by-side SPY comparison](screenshots/risk-allocation.png)](screenshots/risk-allocation.png?raw=true)
+
+| Measure | What it helps you understand |
+|---|---|
+| Total return | The percentage gained or lost across the selected period |
+| Annualized volatility | How much daily returns fluctuated, scaled to a trading year |
+| Sharpe ratio | Return above the assumed risk-free rate relative to volatility |
+| Maximum drawdown | The largest percentage loss from a previous portfolio peak |
+| Average correlation | How closely the holdings' daily returns moved together |
+
+Open **Assumptions, data & methodology** to review the calculation assumptions, change the annual risk-free rate, or refresh prices. The risk-free rate starts at **0%** as an editable assumption, not a live Treasury rate.
+
+### 4. Explain the investment story
+
+Below the chart, the app describes observed gains, the worst decline, and recovery milestones. You can add your reason for choosing the investments and compare a personal loss-tolerance input with the historical drawdown. Notes stay in the browser tab and reset on reload. The historical comparison is not a suitability assessment.
+
+Screenshots show different demonstration portfolios and development checkpoints; compare values only when holdings, weights, and dates match. The opening image shows the latest supplied layout.
+
+## Run the app
 
 Install Python 3.12 and Git. In a terminal, clone the repository and enter its folder:
 
@@ -49,134 +93,43 @@ longer the launch command.** No Node install/build, account, database, API key, 
 paid AI API is required. Plotly JavaScript is served locally from the installed
 Python package. Internet access is needed to search and download market data.
 
-## The intended interaction
+## Error handling
 
-1. Type a company name (such as Tesla) or ticker in **Add a stock or ETF**.
-   Search queries Yahoo Finance; results show company name, ticker, and exchange.
-   Click **+ Add** on a result to add exactly that security. A confirmation names
-   its starting allocation, its holdings row is marked NEW, and its chart line is
-   automatically highlighted. It is not limited to the random
-   selection universe. Search supports US-listed equities and ETFs only.
-2. The new holding receives 1/(new holding count) of starting capital. Existing
-   weights scale proportionally into the remaining allocation. For example,
-   40/35/25 becomes 30/26.25/18.75/25 after adding a fourth stock.
-3. Starting allocation percentages are always visible in the holdings table.
-   Edit them directly. Changes are **drafts** until their sum is exactly 100% and
-   you click **Apply weights**. The chart and risk measures retain the last applied
-   portfolio in the meantime; the interface labels this explicitly. Other portfolio
-   actions are disabled during a draft. Cancel discards edits.
-4. For the assignment example, set AAPL to 40, MSFT to 35, and SPY to 25, then Apply.
-   No automatic normalization changes those requested percentages.
-5. **Equal weight** resets all starting allocations. The x beside a holding removes
-   it and redistributes the allocation proportionally to the remaining holdings.
-   At least one holding must remain; a prompt reminds you to use at least three
-   for the assignment. Zero allocations are allowed, but the total must be 100%.
-6. The **Number of holdings** slider follows the actual portfolio count after
-   loading, adding, removing, or generating holdings. To size a new random mix,
-   move the slider, then click **Generate random mix**.
-   This replaces the portfolio with 1–30 unique US equities and equal allocations.
-   One stock receives 100%; correlation is N/A until at least two holdings have
-   positive allocations. The assignment reminder to use at least three remains.
-   Moving the slider alone does not change the current holdings. While its value
-   differs from the portfolio, the hint explicitly shows both the actual count
-   and the next random-mix size. The holdings panel always shows the actual count.
-7. Choose **1 year**, **2 years**, or **5 years**. Start/end dates are always visible
-   and automatically show the actual common trading dates used by that preset.
-   They update if adding or removing a holding changes the available common history.
-   For a different range, use the separate **Custom dates** button, enter a start
-   and end date, and click **Apply range**. Both dates are inclusive. Weekends and
-   holidays use only available trading dates within the chosen range. The chart,
-   returns, risk measures, and SPY comparison all use the same common dates and
-   restart at $1 on the first common observation. At least three common prices
-   are needed. Future dates and reversed ranges are rejected. Date edits leave
-   the last applied chart intact until Apply; Cancel restores the applied range.
-   Adding holdings or editing weights preserves the applied date range.
-   See risk, allocation, and benchmark comparison
-   immediately below the main chart. Average correlation is a read-only number
-   card with a short explanation of −1, 0, and +1; it has no slider or editable control.
-8. Hover a performance line to make it stand out and show its ticker, date, growth,
-   and return. Click a line or ticker in the holdings table to keep it highlighted.
-   Click it again, choose **Clear selection** above the chart, or press Escape to clear the selection.
-   Highlighting only changes the display, never the allocations or calculations.
+- Weights must total exactly 100%; invalid drafts cannot be applied. Duplicate securities and invalid dates are rejected.
+- Price series are aligned to common valid dates without forward filling. Insufficient history produces an explanatory error.
+- Failed searches and downloads show an error while preserving the last successful portfolio. No simulated data replaces unavailable prices.
+- A matching previously downloaded dataset may be used during an outage, with a visible warning and its original retrieval timestamp. A fresh installation has no such fallback until a download succeeds.
 
-Allocation percentages have two-decimal precision and sum to exactly 100.00%.
-Equal weights use largest-remainder rounding (e.g. 33.34/33.33/33.33) so displayed
-percentages match the calculations. A failed search/add/download leaves the last
-successful portfolio intact. Nothing is traded or sent to a brokerage.
+## Assignment coverage
 
-## Requirement coverage
+The selected topic is **Investment Portfolio Risk Analyzer**. It supports three or more stocks/ETFs, editable weights, portfolio returns, annualized volatility, Sharpe ratio, maximum drawdown, allocation and performance charts, and a market benchmark.
 
-| Project feature | Implementation |
+| Minimum functional requirement | How the app meets it |
 |---|---|
-| Select at least three stocks or ETFs | Live company/ticker search, defaults to AAPL/MSFT/SPY, supports up to 30 |
-| Investment amounts or portfolio weights | Always-visible editable starting weights and explicit Apply |
-| Portfolio returns | Buy-and-hold growth series, total period return, growth of $10,000 |
-| Annualized volatility | Sample daily return standard deviation × sqrt(252) |
-| Sharpe ratio | Mean daily excess return / sample daily volatility × sqrt(252) |
-| Maximum drawdown | Worst decline from a running peak, including initial capital |
-| Allocation and performance charts | Starting allocation donut; individual/portfolio performance lines |
-| Market benchmark | SPY dashed line and same-period risk/return comparison |
+| 1. Working application | Executable Python server and interactive browser interface; launch steps above |
+| 2. Financial data integration | Yahoo Finance search and historical adjusted daily prices through `yfinance` |
+| 3. User interaction | Security search, weights, date ranges, random mixes, and risk-free assumption |
+| 4. At least three financial calculations | Total return, annualized volatility, Sharpe ratio, and maximum drawdown |
+| 5. At least two visualizations | Historical performance line chart and allocation donut chart |
+| 6. Error handling | Input validation, missing-data checks, visible provider errors, and labeled cache fallback |
+| 7. Documentation | Purpose, illustrated features, API sources, formulas, and limitations in this README |
+| 8. Reproducibility | Complete source, pinned dependencies, installation commands, and automated tests |
 
-The selected FIN 471 topic is **Investment Portfolio Risk Analyzer**. The app
-also addresses the assignment-wide requirements:
-
-| Class requirement | Evidence in this repository |
+| GitHub submission requirement | Where to find it |
 |---|---|
-| Executable, interactive prototype | Python HTTP server and browser UI; installation and launch commands above |
-| External financial API without a paid subscription | Yahoo Finance search and adjusted daily prices through `yfinance`; no API key required |
-| At least three financial calculations | Total return, annualized volatility, Sharpe ratio, and maximum drawdown in `portfolio.py` |
-| At least two relevant visualizations | Historical performance line chart and starting-allocation donut chart |
-| Invalid inputs, missing data, and API failures | Validation, common-date alignment, visible errors, and explicitly labeled matching-cache fallback |
-| Reproducibility and documentation | Pinned dependencies, setup instructions, formulas, data assumptions, limitations, and tests |
-| AI coding agent | OpenAI Codex; development and validation described below |
-| At least two working-app screenshots | Opening performance screenshot plus the risk/allocation screenshot below |
-| GitHub submission and demonstration | Repository URL below; shared demonstration video linked at the top; walkthrough below |
+| Complete source code | Python modules and `web/` |
+| README and dependencies | `README.md` and `requirements.txt` |
+| Installation and run instructions | **Run the app** above |
+| API and dataset documentation | **Data and calculations** below |
+| At least two working-app screenshots | Four images in this README, stored in `screenshots/` |
+| Financial concepts and calculations | Risk explanation above and expandable formulas below |
+| AI coding-agent explanation | **Testing and AI-assisted development** below |
+| Known limitations and incomplete features | **Limitations** below |
+| Working demonstration | Video link at the top and demonstration sequence below |
 
-## Class demonstration walkthrough
+**Repository to submit:** [github.com/dinozerg/portfolio-thesis-analyzer](https://github.com/dinozerg/portfolio-thesis-analyzer)
 
-1. Launch the app and show AAPL, MSFT, and SPY. Keep at least three holdings
-   during the class demonstration, even though the app also permits smaller
-   portfolios for comparison.
-2. Set starting weights to **40%, 35%, and 25%**, then click **Apply weights**.
-   Show the historical dates and explain the buy-and-hold assumption.
-3. Show the performance chart and the $10,000 outcome alongside SPY. Explain
-   that the displayed return is for the full period, not an annualized return.
-4. Scroll to the allocation donut and risk measures. Explain volatility,
-   Sharpe ratio, maximum drawdown, and the editable risk-free assumption.
-5. Change the weights or date range and describe how the results change.
-   Search for another company and add it to demonstrate external API interaction.
-6. Enter weights that do not total 100% to show validation. Explain how missing
-   prices and provider outages are handled and why past performance is not a forecast.
-
-Submit https://github.com/dinozerg/portfolio-thesis-analyzer and demonstrate
-the running app as required by the instructor. Public hosting is not specified
-in the supplied assignment; a local demonstration requires the app to be running
-on the presenting computer. Fixed custom dates and identical weights make a
-comparison repeatable, subject to provider revisions to historical prices.
-
-## Working application screenshots
-
-![Risk and allocation](screenshots/risk-allocation.png)
-
-## Files
-
-- `app.py`: HTTP entry point, static assets and JSON routes; defaults to loopback only.
-- `web/index.html`, `web/styles.css`, `web/main.js`: browser interface.
-- `service.py`: validates state, changes allocations, assembles financial results.
-- `portfolio.py`: price alignment, buy-and-hold calculations, and risk metrics.
-- `market_data.py`: historical download, live search, and caching.
-- `test_app.py`, `test_portfolio.py`: deterministic application/calculation tests.
-- `requirements.txt`: pinned Python dependencies.
-
-Local routes: `GET /api/search?q=company`, `POST /api/analyze`, and `GET /health`.
-`/api/analyze` takes holdings, integer allocation basis points totaling 10,000,
-period (`1y`, `2y`, `5y`, or `custom`), annual risk-free assumption, and an optional action.
-Custom ranges also require `start_date` and `end_date` in YYYY-MM-DD form. Invalid requests
-return a descriptive error; changes are committed to the UI only on success.
-The built-in server is appropriate for this local prototype, not a production
-multi-user hosting configuration. Public deployment remains a separate step.
-
-## Data APIs
+## Data and calculations
 
 The app uses [yfinance](https://github.com/ranaroussi/yfinance), an unofficial client
 for Yahoo Finance's market-data APIs:
@@ -211,7 +164,8 @@ without a key is not a redistribution license. Public display rights are not yet
 established; confirm terms or replace the adapter with a permitted source before
 publishing. Code licensing and market-data rights are separate.
 
-## Financial concepts and formulas
+<details>
+<summary><strong>Calculation formulas and assumptions</strong></summary>
 
 For aligned adjusted price P(i,t), growth G(i,t) = P(i,t)/P(i,0).
 Portfolio growth V(t) = sum(w(i) × G(i,t)), where w are the applied starting
@@ -249,7 +203,9 @@ PG, KO, PEP, WMT, COST, XOM, CVX, CAT, HD, DIS, NFLX, ADBE, CRM, CSCO, INTC, AMD
 TXN, MCD, NKE, IBM. It is a convenience sample, not an optimized recommendation.
 Company search is broader than this list. No currency conversion is implemented.
 
-## Verification and AI-agent use
+</details>
+
+## Testing and AI-assisted development
 
 ```powershell
 .\.venv\Scripts\python.exe -m unittest -v
@@ -279,22 +235,44 @@ interface for closer visual fidelity, real company search, and a clearer weight
 editor. Code was executed, calculation tests run, and browser flows checked against
 real downloaded data. AI output was validated rather than accepted on trust.
 
-## Limitations and submission status
+<details>
+<summary><strong>Source files and local API routes</strong></summary>
 
-All source, dependency instructions, methodology, API notes, AI-use explanation,
-and working-app screenshots are committed to GitHub. A shared demonstration video
-is linked at the top of this README. Submit the repository URL and follow the
-instructor's demonstration requirements. No publicly hosted interactive app is
-provided. Never upload .venv, .cache, logs, or credentials.
+- `app.py`: HTTP entry point, static assets and JSON routes; defaults to loopback only.
+- `web/index.html`, `web/styles.css`, `web/main.js`: browser interface.
+- `service.py`: validates state, changes allocations, assembles financial results.
+- `portfolio.py`: price alignment, buy-and-hold calculations, and risk metrics.
+- `market_data.py`: historical download, live search, and caching.
+- `test_app.py`, `test_portfolio.py`: deterministic application/calculation tests.
+- `requirements.txt`: pinned Python dependencies.
 
-This is historical educational analysis: no fees, taxes, slippage, cash flows,
-transaction execution, persistent user accounts, or guaranteed data availability.
-Survivorship and selection bias apply. API limits/outages and data revisions can
-affect results. Optional AI-written investment theses and synthetic correlation
-simulation are not implemented; the selected project does not require them.
-Screenshots illustrate the running prototype; displayed values can differ when
-the selected dates or provider data change.
+Local routes: `GET /api/search?q=company`, `POST /api/analyze`, and `GET /health`.
+`/api/analyze` takes holdings, integer allocation basis points totaling 10,000,
+period (`1y`, `2y`, `5y`, or `custom`), annual risk-free assumption, and an optional action.
+Custom ranges also require `start_date` and `end_date` in YYYY-MM-DD form. Invalid requests
+return a descriptive error; changes are committed to the UI only on success.
+The built-in server is appropriate for this local prototype, not a production
+multi-user hosting configuration. Public deployment remains a separate step.
 
-Historical performance is not a prediction or personalized investment advice.
+</details>
 
-The story below the chart identifies the first close above starting capital, the last recovery above starting capital, the worst peak-to-trough decline and its recovery date. These are observed milestones, not an inferred cause of growth. An optional personal thesis note and loss-tolerance input provide context; they stay in the tab and reset on reload. The tolerance comparison is historical only, not a suitability assessment. Random selections are explicitly labeled as experiments without an investor-specific thesis.
+## Demonstrate the prototype
+
+1. Launch the app with AAPL, MSFT, and SPY, then apply **40% / 35% / 25%** weights.
+2. Explain the selected dates, portfolio line, and $10,000 outcome compared with SPY.
+3. Show the allocation donut, volatility, Sharpe ratio, and maximum drawdown.
+4. Change weights or dates and explain how the results change. Search for and add another security.
+5. Show that weights which do not total 100% cannot be applied. Explain data-source and historical-analysis limitations.
+
+For a repeatable comparison, record the holdings, weights, custom dates, risk-free assumption, and retrieval time. Provider revisions can still change historical results. Submit the repository URL and follow the instructor's requirements for a recorded or live demonstration.
+
+## Limitations
+
+- Historical educational analysis only: no forecasts, trade execution, fees, taxes, slippage, or additional deposits and withdrawals.
+- Buy and hold with fractional shares; weights drift after the initial allocation. The chart and editor show starting weights.
+- US stock/ETF support; no currency conversion. Random mixes use a fixed 30-stock universe and have selection and survivorship bias.
+- Yahoo Finance is an unofficial source accessed through `yfinance`; outages, limits, missing history, and revisions can affect results. Public data-display rights need separate review before hosting a public service.
+- No persistent accounts or saved thesis notes. AI-generated investment theses and synthetic correlation simulations are not implemented or required by the selected project.
+- The app runs locally. The shared recording demonstrates it, but is not a publicly hosted interactive application.
+
+Never commit API keys, passwords, tokens, personal financial information, `.venv`, or `.cache`. Historical performance is not a prediction or personalized investment advice.
