@@ -1,6 +1,8 @@
 # Portfolio Thesis Analyzer
 
-**FIN 410 — Project 2: Investment Portfolio Risk Analyzer**
+**FIN 471 — Project: Investment Portfolio Risk Analyzer**
+
+<img width="2000" height="1143" alt="image" src="https://github.com/user-attachments/assets/c2b202af-a36e-42d4-a4f0-fa1cfba80970" />
 
 A local, interactive finance prototype that shows how securities and allocations
 change portfolio performance and risk. Its navy header, red portfolio line, thin
@@ -91,7 +93,7 @@ successful portfolio intact. Nothing is traded or sent to a brokerage.
 
 ## Requirement coverage
 
-| Project 2 feature | Implementation |
+| Project feature | Implementation |
 |---|---|
 | Select at least three stocks or ETFs | Live company/ticker search, defaults to AAPL/MSFT/SPY, supports up to 30 |
 | Investment amounts or portfolio weights | Always-visible editable starting weights and explicit Apply |
@@ -224,7 +226,7 @@ This is historical educational analysis: no fees, taxes, slippage, cash flows,
 transaction execution, persistent user accounts, or guaranteed data availability.
 Survivorship and selection bias apply. API limits/outages and data revisions can
 affect results. Optional AI-written investment theses and synthetic correlation
-simulation are not implemented; Project 2 does not require them. The screenshot
+simulation are not implemented; Project does not require them. The screenshot
 is a visual reference, not a source of financial observations.
 
 Historical performance is not a prediction or personalized investment advice.
