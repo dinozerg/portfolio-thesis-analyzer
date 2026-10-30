@@ -28,11 +28,7 @@
 <p class="micro allocation-help" id="weight-help">Edit the starting percentages, then apply when they total 100%.</p>
 <p class="micro" id="add-rule">A new stock receives an equal share; existing weights scale proportionally.</p>
 </aside>
-<div class="workspace-footer"><span id="status" role="status" aria-live="polite">Loading your portfolio…</span><span>Historical market data · Educational use only</span></div>
-</section>
-<div id="error" class="notice error" role="alert" hidden></div><div id="data-warning" class="notice" hidden></div>
-<section class="story-section intro" aria-label="The story behind the portfolio">
-<h2>The money, the journey, and your reason for investing</h2>
+<div class="chart-dollar-summary intro">
   <section class="investment-summary" aria-label="What your investment would be worth">
     <h2>If you had invested $10,000 at the start…</h2>
     <p class="investment-assumption">Your principal is the money you start with. One $10,000 investment, split using your allocation percentages. No extra deposits.</p>
@@ -43,6 +39,13 @@
     <p id="dollar-comparison" class="dollar-comparison"></p>
     <p id="summary-dates" class="summary-dates">Historical illustration · not a forecast</p>
   </section>
+</div>
+<div class="workspace-footer"><span id="status" role="status" aria-live="polite">Loading your portfolio…</span><span>Historical market data · Educational use only</span></div>
+</section>
+<div id="error" class="notice error" role="alert" hidden></div><div id="data-warning" class="notice" hidden></div>
+<section class="story-section intro" aria-label="The story behind the portfolio">
+<h2>The money, the journey, and your reason for investing</h2>
+
   <p class="plain-definition"><strong>Return</strong> is your total gain or loss over the selected dates, as a percentage of the starting money. A +10% return turns $10,000 into $11,000; a −10% return leaves $9,000. <strong>Buy and hold</strong> means keeping the same investments through those dates.</p>
 <div class="story-grid"><section><h3>What happened along the way?</h3><p id="journey"></p><p id="downside"></p><p id="recovery"></p><p class="micro">The worst historical decline is not a limit on future losses.</p></section>
 <section><h3>Why these investments?</h3><p id="selection-story">The starting mix is a demonstration, not a recommendation.</p><label for="investment-purpose">My goal and reason for these picks</label><textarea id="investment-purpose" rows="3" placeholder="Example: Long-term growth; I chose these companies because…"></textarea><label for="loss-tolerance">A decline I could tolerate without needing to sell (%)</label><input id="loss-tolerance" type="number" min="0" max="100" step="1" placeholder="For example, 20"><p id="tolerance-result">Enter your own limit to compare it with this portfolio’s historical decline.</p><p class="micro">A good past return alone cannot tell you whether this is a good choice for you. Consider when you need the money, your ability to absorb losses, and why you expect these investments to meet your goal. Notes stay in this tab and reset on reload.</p></section></div></section>

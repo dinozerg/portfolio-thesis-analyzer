@@ -15,3 +15,16 @@
 .story-section{margin-top:26px;padding:28px 32px;background:white;border:1px solid var(--line);border-radius:18px}.story-section>h2{font-size:23px;margin:0 0 20px}.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;font-size:15px;line-height:1.65}.story-grid h3{font-size:18px}.story-grid label{display:block;font-size:13px;margin:15px 0 6px}.story-grid textarea,.story-grid input{font:inherit;padding:10px;border:1px solid #cbd2dc;border-radius:7px;width:100%}.story-grid input{max-width:150px}.workspace>.intro{padding-top:0}.workspace>.intro .chart-key{margin-top:0}@media(max-width:650px){.story-grid{grid-template-columns:1fr}.story-section{padding:20px}.story-section.intro{order:initial}}
 
 .holdings .company-name{display:block;font-size:10px;line-height:1.35;color:#657180;max-width:145px;white-space:normal;overflow-wrap:anywhere;margin:0 0 6px 22px}.holdings td{vertical-align:middle}
+
+/* Keep the dollar outcome immediately beneath the performance visual. */
+.workspace{grid-template-rows:min-content min-content min-content auto}
+.workspace>.controls{grid-row:1/4}
+.chart-dollar-summary{grid-column:2/-1;grid-row:3;padding:0!important;align-self:start}
+.chart-dollar-summary .investment-summary{padding:16px 20px}
+.chart-dollar-summary .investment-summary h2{font-size:17px}
+.chart-dollar-summary .investment-assumption{margin:-6px 0 12px}
+.chart-dollar-summary .investment-outcomes>div>strong{font-size:34px}
+.chart-dollar-summary .investment-outcomes .benchmark-outcome>strong{font-size:28px}
+.chart-dollar-summary .dollar-comparison{margin-top:10px}
+@media(max-width:1000px) and (min-width:651px){.workspace>.controls{grid-row:1/5}.chart-dollar-summary{grid-column:2;grid-row:3}.workspace>.holdings-panel{grid-row:4}}
+@media(max-width:650px){.workspace>.chart-dollar-summary{order:0}.workspace>.holdings-panel{order:1}.workspace>.workspace-footer{order:2}}

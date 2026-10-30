@@ -2,7 +2,11 @@
 
 **FIN 471 — Project: Investment Portfolio Risk Analyzer**
 
-![Working Portfolio Thesis Analyzer: holdings, allocations, and historical performance](screenshots/chart-first.png)
+[![Working Portfolio Thesis Analyzer: ten holdings, allocations, historical performance, and investment outcome](screenshots/portfolio-overview.png)](https://www.awesomescreenshot.com/video/57918894?key=9ba6d82660079e865bfe5942cc3b9eb0)
+
+**[▶ Watch the application demonstration](https://www.awesomescreenshot.com/video/57918894?key=9ba6d82660079e865bfe5942cc3b9eb0)**
+
+Click the screenshot or the link above to watch the shared video on Awesome Screenshot.
 
 A local, interactive finance prototype that shows how securities and allocations
 change portfolio performance and risk. It addresses the financial problem of
@@ -126,7 +130,7 @@ also addresses the assignment-wide requirements:
 | Reproducibility and documentation | Pinned dependencies, setup instructions, formulas, data assumptions, limitations, and tests |
 | AI coding agent | OpenAI Codex; development and validation described below |
 | At least two working-app screenshots | Opening performance screenshot plus the risk/allocation screenshot below |
-| GitHub submission and demonstration | Repository URL below; demonstration walkthrough below for the student to present |
+| GitHub submission and demonstration | Repository URL below; shared demonstration video linked at the top; walkthrough below |
 
 ## Class demonstration walkthrough
 
@@ -265,7 +269,8 @@ API check retrieved 251 aligned daily observations for the one-year AAPL/MSFT/SP
 company search returned results. The price response was fresh, not an outage-cache
 fallback. The local server, interface, and Plotly asset returned successful HTTP
 responses, and the running browser displayed both charts and the FIN 471 footer.
-The two screenshots displayed in this README were refreshed from that running app.
+The opening screenshot was supplied by the author after the latest layout update;
+the risk/allocation screenshot was captured from the running app during validation.
 These checks do not replace the student's working application demonstration.
 
 OpenAI Codex implemented and iterated on the app from the user's README, assignment,
@@ -277,9 +282,10 @@ real downloaded data. AI output was validated rather than accepted on trust.
 ## Limitations and submission status
 
 All source, dependency instructions, methodology, API notes, AI-use explanation,
-and working-app screenshots are committed to GitHub. The student still needs to
-submit the repository URL and present the working demonstration. No public hosted
-demo is provided. Never upload .venv, .cache, logs, or credentials.
+and working-app screenshots are committed to GitHub. A shared demonstration video
+is linked at the top of this README. Submit the repository URL and follow the
+instructor's demonstration requirements. No publicly hosted interactive app is
+provided. Never upload .venv, .cache, logs, or credentials.
 
 This is historical educational analysis: no fees, taxes, slippage, cash flows,
 transaction execution, persistent user accounts, or guaranteed data availability.
