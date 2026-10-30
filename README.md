@@ -2,12 +2,14 @@
 
 **FIN 471 — Project: Investment Portfolio Risk Analyzer**
 
-<img width="2000" height="1143" alt="image" src="https://github.com/user-attachments/assets/c2b202af-a36e-42d4-a4f0-fa1cfba80970" />
+![Working Portfolio Thesis Analyzer: holdings, allocations, and historical performance](screenshots/chart-first.png)
 
 A local, interactive finance prototype that shows how securities and allocations
-change portfolio performance and risk. Its navy header, red portfolio line, thin
-security lines, vertical controls, and holdings table follow the supplied reference.
-The screen uses **real historical data**, not the reference image's synthetic stocks.
+change portfolio performance and risk. It addresses the financial problem of
+underestimating individual-security risk and portfolio concentration. Users can
+compare allocations and evaluate historical returns, volatility, risk-adjusted
+performance, and losses against SPY before forming their own investment thesis.
+The screenshot above shows the working application using **real historical data**.
 Below the main chart, the result shows what a hypothetical **$10,000 starting investment** became,
 the dollar gain or loss, the total percentage return, and the same investment in
 SPY. Values update whenever the holdings, weights, or dates change. This is a
@@ -16,7 +18,14 @@ the headline are rounded to whole dollars.
 
 ## Run it
 
-Python 3.12 is tested. From this folder:
+Install Python 3.12 and Git. In a terminal, clone the repository and enter its folder:
+
+```powershell
+git clone https://github.com/dinozerg/portfolio-thesis-analyzer.git
+cd portfolio-thesis-analyzer
+```
+
+Python 3.12 is tested. From that folder:
 
 ```powershell
 python -m venv .venv
@@ -104,11 +113,44 @@ successful portfolio intact. Nothing is traded or sent to a brokerage.
 | Allocation and performance charts | Starting allocation donut; individual/portfolio performance lines |
 | Market benchmark | SPY dashed line and same-period risk/return comparison |
 
+The selected FIN 471 topic is **Investment Portfolio Risk Analyzer**. The app
+also addresses the assignment-wide requirements:
+
+| Class requirement | Evidence in this repository |
+|---|---|
+| Executable, interactive prototype | Python HTTP server and browser UI; installation and launch commands above |
+| External financial API without a paid subscription | Yahoo Finance search and adjusted daily prices through `yfinance`; no API key required |
+| At least three financial calculations | Total return, annualized volatility, Sharpe ratio, and maximum drawdown in `portfolio.py` |
+| At least two relevant visualizations | Historical performance line chart and starting-allocation donut chart |
+| Invalid inputs, missing data, and API failures | Validation, common-date alignment, visible errors, and explicitly labeled matching-cache fallback |
+| Reproducibility and documentation | Pinned dependencies, setup instructions, formulas, data assumptions, limitations, and tests |
+| AI coding agent | OpenAI Codex; development and validation described below |
+| At least two working-app screenshots | Opening performance screenshot plus the risk/allocation screenshot below |
+| GitHub submission and demonstration | Repository URL below; demonstration walkthrough below for the student to present |
+
+## Class demonstration walkthrough
+
+1. Launch the app and show AAPL, MSFT, and SPY. Keep at least three holdings
+   during the class demonstration, even though the app also permits smaller
+   portfolios for comparison.
+2. Set starting weights to **40%, 35%, and 25%**, then click **Apply weights**.
+   Show the historical dates and explain the buy-and-hold assumption.
+3. Show the performance chart and the $10,000 outcome alongside SPY. Explain
+   that the displayed return is for the full period, not an annualized return.
+4. Scroll to the allocation donut and risk measures. Explain volatility,
+   Sharpe ratio, maximum drawdown, and the editable risk-free assumption.
+5. Change the weights or date range and describe how the results change.
+   Search for another company and add it to demonstrate external API interaction.
+6. Enter weights that do not total 100% to show validation. Explain how missing
+   prices and provider outages are handled and why past performance is not a forecast.
+
+Submit https://github.com/dinozerg/portfolio-thesis-analyzer and demonstrate
+the running app as required by the instructor. Public hosting is not specified
+in the supplied assignment; a local demonstration requires the app to be running
+on the presenting computer. Fixed custom dates and identical weights make a
+comparison repeatable, subject to provider revisions to historical prices.
+
 ## Working application screenshots
-
-![Chart-first portfolio explorer](screenshots/chart-first.png)
-
-![Portfolio explorer](screenshots/performance.png)
 
 ![Risk and allocation](screenshots/risk-allocation.png)
 
@@ -134,6 +176,14 @@ multi-user hosting configuration. Public deployment remains a separate step.
 
 The app uses [yfinance](https://github.com/ranaroussi/yfinance), an unofficial client
 for Yahoo Finance's market-data APIs:
+
+The assignment allows an alternative historical-price source; Finnhub is suggested,
+not mandatory. Live downloads and company search were successfully checked on
+October 29, 2026, without an API key or paid subscription. The
+[yfinance documentation](https://ranaroussi.github.io/yfinance/) identifies the
+tool as intended for research and education and the Yahoo Finance API as intended
+for personal use. This is a local educational prototype; that access should not
+be read as permission to redistribute a market-data service.
 
 - [`Search`](https://ranaroussi.github.io/yfinance/reference/api/yfinance.Search.html)
   searches company names/tickers and returns listings. Results are filtered to
@@ -209,6 +259,15 @@ random uniqueness, one-stock portfolios, inclusive custom-date boundaries,
 invalid/insufficient date ranges, rebasing to the selected window, date-specific
 cache isolation, and filtering company-search results.
 
+Validation on October 29, 2026: **26 automated tests passed**. A separate live
+API check retrieved 251 aligned daily observations for the one-year AAPL/MSFT/SPY
+40/35/25 example, calculated all four required return/risk measures, and confirmed
+company search returned results. The price response was fresh, not an outage-cache
+fallback. The local server, interface, and Plotly asset returned successful HTTP
+responses, and the running browser displayed both charts and the FIN 471 footer.
+The two screenshots displayed in this README were refreshed from that running app.
+These checks do not replace the student's working application demonstration.
+
 OpenAI Codex implemented and iterated on the app from the user's README, assignment,
 and screenshot. The first version used Streamlit; user feedback prompted a custom
 interface for closer visual fidelity, real company search, and a clearer weight
@@ -218,16 +277,17 @@ real downloaded data. AI output was validated rather than accepted on trust.
 ## Limitations and submission status
 
 All source, dependency instructions, methodology, API notes, AI-use explanation,
-and working-app screenshots are in this folder. GitHub upload and a public demo
-are still pending. Never upload .venv, .cache, logs, or credentials. Localhost is
-not a publicly accessible demo URL.
+and working-app screenshots are committed to GitHub. The student still needs to
+submit the repository URL and present the working demonstration. No public hosted
+demo is provided. Never upload .venv, .cache, logs, or credentials.
 
 This is historical educational analysis: no fees, taxes, slippage, cash flows,
 transaction execution, persistent user accounts, or guaranteed data availability.
 Survivorship and selection bias apply. API limits/outages and data revisions can
 affect results. Optional AI-written investment theses and synthetic correlation
-simulation are not implemented; Project does not require them. The screenshot
-is a visual reference, not a source of financial observations.
+simulation are not implemented; the selected project does not require them.
+Screenshots illustrate the running prototype; displayed values can differ when
+the selected dates or provider data change.
 
 Historical performance is not a prediction or personalized investment advice.
 
