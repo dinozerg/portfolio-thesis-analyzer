@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio Thesis Analyzer</title><link rel="stylesheet" href="/styles.css"><script defer src="/plotly.js"></script><script defer src="/main.js?v=5"></script></head>
+<body>
+<header class="masthead"><h1>PORTFOLIO THESIS ANALYZER</h1><span>Diversification &amp; Portfolio Risk Explorer</span></header>
+<main>
+<section class="workspace" aria-label="Portfolio explorer">
+<aside class="controls">
+  <div class="search-section"><label for="stock-search">Add a stock or ETF</label><div class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5"/></svg><input id="stock-search" autocomplete="off" placeholder="Company name or ticker" aria-controls="search-results" aria-expanded="false"><span class="search-key">↵</span></div><div id="search-results" class="search-results" hidden></div><p class="micro">Search Yahoo Finance · US listings<br>Click <strong>+ Add</strong> to add its line and allocation.</p><p id="add-feedback" class="micro add-feedback" role="status" aria-live="polite" hidden></p></div>
+  <label class="section-label" for="stock-count">Number of holdings</label>
+  <div class="vertical-control"><span class="upper-limit">30</span><input id="stock-count" class="vertical-range" type="range" min="1" max="30" value="3" aria-label="Number of holdings" aria-describedby="count-help"><output id="count-value" for="stock-count">3</output><span class="lower-limit">1</span></div>
+  <p id="count-help" class="micro count-help">3 holdings in your portfolio. Move the slider to size a new random mix.</p>
+  <div class="correlation-section correlation-summary"><h3>Average correlation</h3><strong id="correlation-value">—</strong><p id="correlation-explanation">How closely the holdings’ daily returns move together.</p><p class="correlation-key">+1 = move together<br>0 = little linear relationship<br>−1 = move in opposite directions</p><span class="micro">Calculated from the selected history</span></div>
+  <div class="history-controls"><p class="micro history-label">HISTORICAL PERIOD</p><div class="period-presets" role="group" aria-label="Historical period"><button class="period-preset" data-period="1y" aria-pressed="false">1 year</button><button class="period-preset" data-period="2y" aria-pressed="false">2 years</button><button class="period-preset" data-period="5y" aria-pressed="true">5 years</button></div><button id="custom-dates" class="custom-dates" aria-pressed="false" aria-controls="date-range">Custom dates</button>
+  <div id="date-range" class="date-range"><label for="start-date">Start date</label><input id="start-date" type="date" min="1900-01-01" required readonly><label for="end-date">End date</label><input id="end-date" type="date" min="1900-01-02" required readonly><div class="date-actions" id="date-actions" hidden><button id="apply-range">Apply range</button><button id="cancel-range" class="text-button" hidden>Cancel</button></div><p id="date-help" class="micro" role="status">Dates fill automatically when prices load.</p></div></div>
+</aside>
+<div class="intro">
+  <p id="intro" class="chart-key">The thick <span class="red">red line</span> is your portfolio. Thin lines are its holdings; the dashed line is SPY.</p>
+  <p id="add-notice" class="add-notice" hidden></p>
+</div>
+<section class="chart-panel" aria-label="Historical portfolio performance"><h2 id="chart-title">Growth of $1 Over 5 Years</h2><p id="unit-example" class="unit-example">Every line starts with $1 invested.</p><p class="chart-interaction"><span id="line-focus">Hover a line to highlight it. Click a line or ticker to keep it selected.</span><button id="clear-highlight" class="text-button" title="Show all lines (Escape)" hidden>Clear selection</button></p><div id="performance-chart" aria-label="Value of one dollar invested over time"></div><p class="chart-foot"><span id="date-label">Loading historical prices…</span><span>Buy and hold · No rebalancing</span></p></section>
+<aside class="holdings-panel" aria-label="Portfolio allocations">
+<button id="random-button" class="random-button"><span class="refresh-icon" aria-hidden="true">↻</span><span>Generate random mix<br><small id="random-size">3 stocks · equal weights</small></span></button>
+<div class="holdings-toolbar"><span id="holding-count">3 holdings</span><button id="equal-button" class="text-button">Equal weight</button></div>
+<table class="holdings"><thead><tr><th>HOLDINGS</th><th>WEIGHT</th><th id="return-heading">5Y RETURN</th><th><span class="sr-only">Remove</span></th></tr></thead><tbody id="holding-rows"></tbody></table>
+<div class="allocation-total"><span>Total allocation</span><strong id="allocation-total">100.00%</strong></div>
+<div id="weight-actions" class="weight-actions" hidden><button id="apply-weights">Apply weights</button><button id="cancel-weights" class="text-button">Cancel</button></div>
+<p class="micro allocation-help" id="weight-help">Edit the starting percentages, then apply when they total 100%.</p>
+<p class="micro" id="add-rule">A new stock receives an equal share; existing weights scale proportionally.</p>
+</aside>
+<div class="workspace-footer"><span id="status" role="status" aria-live="polite">Loading your portfolio…</span><span>Historical market data · Educational use only</span></div>
+</section>
+<div id="error" class="notice error" role="alert" hidden></div><div id="data-warning" class="notice" hidden></div>
+<section class="story-section intro" aria-label="The story behind the portfolio">
+<h2>The money, the journey, and your reason for investing</h2>
+  <section class="investment-summary" aria-label="What your investment would be worth">
+    <h2>If you had invested $10,000 at the start…</h2>
+    <p class="investment-assumption">Your principal is the money you start with. One $10,000 investment, split using your allocation percentages. No extra deposits.</p>
+    <div class="investment-outcomes">
+      <div><span>Your portfolio would be worth</span><strong id="portfolio-value">—</strong><p id="portfolio-profit"></p></div>
+      <div class="benchmark-outcome"><span>Market comparison · SPY (S&amp;P 500 fund)</span><strong id="benchmark-value">—</strong><p id="benchmark-profit"></p></div>
+    </div>
+    <p id="dollar-comparison" class="dollar-comparison"></p>
+    <p id="summary-dates" class="summary-dates">Historical illustration · not a forecast</p>
+  </section>
+  <p class="plain-definition"><strong>Return</strong> is your total gain or loss over the selected dates, as a percentage of the starting money. A +10% return turns $10,000 into $11,000; a −10% return leaves $9,000. <strong>Buy and hold</strong> means keeping the same investments through those dates.</p>
+<div class="story-grid"><section><h3>What happened along the way?</h3><p id="journey"></p><p id="downside"></p><p id="recovery"></p><p class="micro">The worst historical decline is not a limit on future losses.</p></section>
+<section><h3>Why these investments?</h3><p id="selection-story">The starting mix is a demonstration, not a recommendation.</p><label for="investment-purpose">My goal and reason for these picks</label><textarea id="investment-purpose" rows="3" placeholder="Example: Long-term growth; I chose these companies because…"></textarea><label for="loss-tolerance">A decline I could tolerate without needing to sell (%)</label><input id="loss-tolerance" type="number" min="0" max="100" step="1" placeholder="For example, 20"><p id="tolerance-result">Enter your own limit to compare it with this portfolio’s historical decline.</p><p class="micro">A good past return alone cannot tell you whether this is a good choice for you. Consider when you need the money, your ability to absorb losses, and why you expect these investments to meet your goal. Notes stay in this tab and reset on reload.</p></section></div></section>
+<section class="risk-section" aria-label="Required portfolio risk analysis">
+  <div class="risk-topline"><h2>Portfolio risk at a glance</h2><span>Same dates. Same assumptions.</span></div>
+  <div id="metrics" class="metrics"></div>
+  <div class="supporting-grid"><section><h3>Starting allocation</h3><div id="allocation-chart" aria-label="Starting allocation donut chart"></div></section><section><h3>Portfolio vs. SPY</h3><table class="comparison"><thead><tr><th>MEASURE</th><th>PORTFOLIO</th><th>SPY</th></tr></thead><tbody id="comparison-rows"></tbody></table><p id="investment-example" class="micro"></p></section></div>
+</section>
+<details class="methodology"><summary>Assumptions, data &amp; methodology</summary><div class="method-content"><div class="assumption-controls"><label for="risk-free">Annual risk-free assumption <input id="risk-free" type="number" min="0" max="20" step="0.25" value="0"> %</label><button id="refresh-button">Refresh prices</button></div><p>Prices are daily closing prices adjusted by Yahoo Finance for splits and dividends, retrieved through yfinance. Each holding starts at $1; the portfolio is the starting-weighted sum of these growth series. Buy and hold with fractional shares: no rebalancing, fees, taxes, or external cash flows.</p><p>Volatility is sample standard deviation of daily portfolio returns × √252. Sharpe is mean daily excess return ÷ sample daily volatility × √252. The daily risk-free assumption is (1 + annual rate)^(1/252) − 1. Default 0% is an editable simplifying assumption, not a current Treasury yield. Zero volatility produces N/A. Maximum drawdown is the worst decline from a prior peak, including the initial investment.</p><p>Average correlation is the unweighted mean of pairwise daily-return correlations among holdings with positive allocations. It is not an adjustable market assumption. The allocation chart and editable weights show starting allocations; buy-and-hold weights drift over time.</p><p>All series use common valid dates. No forward filling. Limited history can shorten the period. Missing interior dates make daily annualization approximate. The latest daily bar may be provisional. Historical returns do not forecast future performance. Random mixes sample 30 US equities, not the full market, and are not recommendations.</p><p id="source-meta"></p><p>Local educational prototype. Yahoo/yfinance is an unofficial source intended for personal research. Confirm public data-display rights or change providers before publication.</p></div></details>
+<footer class="page-footer">FIN 410 · Investment Portfolio Risk Analyzer · Not investment advice</footer>
+</main>
+</body></html>
