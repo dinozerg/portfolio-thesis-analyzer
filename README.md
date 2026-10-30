@@ -2,13 +2,11 @@
 
 **FIN 471 — Project: Investment Portfolio Risk Analyzer**
 
-[![Portfolio Thesis Analyzer showing ten holdings, performance, and investment outcomes](screenshots/portfolio-overview.png)](screenshots/portfolio-overview.png?raw=true)
+[![Portfolio Thesis Analyzer showing ten holdings, performance, and investment outcomes](screenshots/portfolio-overview.png)](https://raw.githubusercontent.com/dinozerg/portfolio-thesis-analyzer/main/screenshots/portfolio-overview.png)
 
 *Click the screenshot to open the full-size image.*
 
-**[▶ Watch the application demonstration](https://www.awesomescreenshot.com/video/57918894?key=9ba6d82660079e865bfe5942cc3b9eb0)**
-
-The recording opens on Awesome Screenshot. GitHub READMEs do not support external iframe players.
+**[▶ Play demonstration](https://www.awesomescreenshot.com/embed?id=57918894&shareKey=9ba6d82660079e865bfe5942cc3b9eb0)**
 
 ## What does the app do?
 
@@ -26,7 +24,7 @@ Search by company name or ticker using **Add a stock or ETF**, then click **+ Ad
 
 In the holdings table, enter the starting percentages and click **Apply weights** when they total **100%**. Try the assignment example: **AAPL 40%, MSFT 35%, SPY 25%**. Draft changes leave the previous results in place until applied. **Equal weight** resets the mix; the × removes a holding and redistributes its allocation.
 
-[![Company names and weights in the holdings table, with AAPL highlighted on the chart](screenshots/company-names.png)](screenshots/company-names.png?raw=true)
+[![Company names and weights in the holdings table, with AAPL highlighted on the chart](screenshots/company-names.png)](https://raw.githubusercontent.com/dinozerg/portfolio-thesis-analyzer/main/screenshots/company-names.png)
 
 *Selecting AAPL highlights its performance line. This changes the display, not the portfolio weights.*
 
@@ -36,7 +34,7 @@ The **thick red line** represents your portfolio, the thin lines represent its h
 
 Directly beneath the chart, the app translates the return into the ending value and gain or loss on a hypothetical **$10,000 starting investment**. SPY uses the same starting amount and dates.
 
-[![Historical date controls and the portfolio's dollar outcome compared with SPY](screenshots/dollars-under-chart.png)](screenshots/dollars-under-chart.png?raw=true)
+[![Historical date controls and the portfolio's dollar outcome compared with SPY](screenshots/dollars-under-chart.png)](https://raw.githubusercontent.com/dinozerg/portfolio-thesis-analyzer/main/screenshots/dollars-under-chart.png)
 
 *This example shows the starting investment, ending value, dollar gain, percentage return, and market comparison together.*
 
@@ -46,7 +44,7 @@ Use **1 year**, **2 years**, **5 years**, or **Custom dates → Apply range** to
 
 The allocation donut shows where the starting money went. The risk cards and comparison table show whether the portfolio's return came with more volatility or a deeper decline than SPY.
 
-[![Portfolio risk measures, allocation donut, and side-by-side SPY comparison](screenshots/risk-allocation.png)](screenshots/risk-allocation.png?raw=true)
+[![Portfolio risk measures, allocation donut, and side-by-side SPY comparison](screenshots/risk-allocation.png)](https://raw.githubusercontent.com/dinozerg/portfolio-thesis-analyzer/main/screenshots/risk-allocation.png)
 
 | Measure | What it helps you understand |
 |---|---|
